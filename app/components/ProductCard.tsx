@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { ProductType } from "../constants/constants";
 
 export const ProductCard = ({ product }: { product: ProductType }) => {
+  console.log("imagen de producto:", product.image);
   return (
     <article
       className="
@@ -12,12 +14,19 @@ export const ProductCard = ({ product }: { product: ProductType }) => {
         transition
         hover:border-white/20
         hover:scale-[1.01]
+        text-center
       "
     >
       <h3 className="text-lg font-semibold">
         {product.name}
       </h3>
 
+      <Image
+        src={`${product.image}`}
+        alt={product.name}
+        width={300}
+        height={400}
+      />
       <p className="text-sm text-[var(--color-muted)] line-clamp-3">
         {product.description}
       </p>

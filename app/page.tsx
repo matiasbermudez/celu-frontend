@@ -1,9 +1,9 @@
-import { ProductsComp } from "./components/ProductsComp";
+import { ProductsPage } from "./components/ProductsPage";
 
 export default function Home() {
   return (
     <main className="">
-      <ProductsComp/>
+      <ProductsPage/>
     </main>
   );
 }
