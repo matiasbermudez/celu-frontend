@@ -26,7 +26,9 @@ export const LoginForm = () => {
 
             if (response.ok) {
                 const result = await response.json();
-                console.log('Success:', result);
+                localStorage.setItem('token', result.token)
+               
+                console.log('Success:', result.token);
             } else {
                 console.error('Error:', response.statusText);
             }
