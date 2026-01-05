@@ -1,13 +1,15 @@
 'use client'
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 type LoginFormData = {
     email: string;
     password: string;
 };
 
+
 export const LoginForm = () => {
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -27,8 +29,7 @@ export const LoginForm = () => {
             if (response.ok) {
                 const result = await response.json();
                 localStorage.setItem('token', result.token)
-               
-                console.log('Success:', result.token);
+                router.push('/')
             } else {
                 console.error('Error:', response.statusText);
             }
@@ -39,7 +40,6 @@ export const LoginForm = () => {
 
 const onSubmit = async (data: LoginFormData) => {
     LoginFetch(data)
-    console.log('Formulario enviado:', data);
 };
 
 return (
