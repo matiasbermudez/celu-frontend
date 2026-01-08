@@ -1,6 +1,7 @@
 'use client'
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../context/AuthContext';
 
 type LoginFormData = {
     email: string;
@@ -9,6 +10,7 @@ type LoginFormData = {
 
 
 export const LoginForm = () => {
+    const auth = useAuth();
     const router = useRouter();
     const {
         register,
@@ -29,6 +31,7 @@ export const LoginForm = () => {
             if (response.ok) {
                 const result = await response.json();
                 localStorage.setItem('token', result.token)
+                auth.login();
                 router.push('/')
             } else {
                 console.error('Error:', response.statusText);
@@ -39,7 +42,7 @@ export const LoginForm = () => {
 }
 
 const onSubmit = async (data: LoginFormData) => {
-    LoginFetch(data)
+    await LoginFetch(data)
 };
 
 return (
@@ -98,6 +101,7 @@ return (
           hover:opacity-90
           transition
           disabled:opacity-50
+          cursor-pointer
         "
         >
             {isSubmitting ? 'Entrando...' : 'Entrar'}
